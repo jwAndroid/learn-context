@@ -1,8 +1,7 @@
-import React, {memo, useCallback, useContext} from 'react';
+import React, {memo} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-import ActionButton from '../components/ActionButton';
-import AppContext from '../contexts/AppContext';
+import {useSampleDispatch, useSampleState} from '../contexts/SampleContext';
 
 const styles = StyleSheet.create({
   block: {justifyContent: 'center', alignItems: 'center', flex: 1},
@@ -10,21 +9,27 @@ const styles = StyleSheet.create({
 });
 
 function Screen() {
-  const {text, setText} = useContext(AppContext);
+  const state = useSampleState(); // dispatch 하여 얻은 값.
+  const dispatch = useSampleDispatch(); // dispatch
 
-  const onPressLeft = useCallback(() => {
-    setText('left');
-  }, [setText]);
-
-  const onPressRight = useCallback(() => {
-    setText('right');
-  }, [setText]);
+  const setCount = () => dispatch({type: 'SET_COUNT', count: 5}); // count 를 넣지 않으면 에러발생
+  const setText = () => dispatch({type: 'SET_TEXT', text: 'bye'});
+  const setColor = () => dispatch({type: 'SET_COLOR', color: 'orange'});
+  const toggleGood = () => dispatch({type: 'TOGGLE_GOOD'});
 
   return (
     <View style={styles.block}>
-      <Text>{text}</Text>
+      <Text>{state.text}</Text>
+      <Text>{state.color}</Text>
+      <Text>{String(state.isGood)}</Text>
+      <Text>{state.count}</Text>
 
-      <ActionButton onPressLeft={onPressLeft} onPressRight={onPressRight} />
+      <View style={{marginTop: 30}}>
+        <Text onPress={setCount}>setCount</Text>
+        <Text onPress={setText}>setText</Text>
+        <Text onPress={setColor}>setColor</Text>
+        <Text onPress={toggleGood}>toggleGood</Text>
+      </View>
     </View>
   );
 }
