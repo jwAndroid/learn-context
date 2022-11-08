@@ -2,31 +2,16 @@
  * @format
  */
 
-import React, {memo, useCallback} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import React, {memo} from 'react';
 
-import ActionButton from './src/components/ActionButton';
-
-const styles = StyleSheet.create({
-  block: {justifyContent: 'center', alignItems: 'center', flex: 1},
-  text: {fontSize: 30},
-});
+import AppContext from './src/contexts/AppContext';
+import Screen from './src/screens/Screen';
 
 function App() {
-  const onPressLeft = useCallback(() => {
-    console.log('left');
-  }, []);
-
-  const onPressRight = useCallback(() => {
-    console.log('right');
-  }, []);
-
   return (
-    <View style={styles.block}>
-      <Text style={styles.text}>30</Text>
-
-      <ActionButton onPressLeft={onPressLeft} onPressRight={onPressRight} />
-    </View>
+    <AppContext.Provider value="안녕하세요!!!">
+      <Screen />
+    </AppContext.Provider>
   );
 }
 
