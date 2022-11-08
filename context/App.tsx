@@ -3,15 +3,15 @@
  */
 
 import React, {memo} from 'react';
+import AppContextProvider from './src/contexts/AppContextProvider';
 
-import AppContext from './src/contexts/AppContext';
 import Screen from './src/screens/Screen';
 
 function App() {
   return (
-    <AppContext.Provider value="안녕하세요!!!">
+    <AppContextProvider>
       <Screen />
-    </AppContext.Provider>
+    </AppContextProvider>
   );
 }
 

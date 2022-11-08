@@ -10,19 +10,19 @@ const styles = StyleSheet.create({
 });
 
 function Screen() {
-  const value = useContext(AppContext);
+  const {text, setText} = useContext(AppContext);
 
   const onPressLeft = useCallback(() => {
-    console.log('left');
-  }, []);
+    setText('left');
+  }, [setText]);
 
   const onPressRight = useCallback(() => {
-    console.log('right');
-  }, []);
+    setText('right');
+  }, [setText]);
 
   return (
     <View style={styles.block}>
-      <Text>{value}</Text>
+      <Text>{text}</Text>
 
       <ActionButton onPressLeft={onPressLeft} onPressRight={onPressRight} />
     </View>
